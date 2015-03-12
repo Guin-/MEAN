@@ -7,7 +7,8 @@ var Comment = mongoose.model('Comment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+/*  res.render('index', { title: 'Express' }); */
+    res.render('index');
 });
 
 /* GET posts page */
@@ -59,7 +60,7 @@ router.put('/posts/:post/upvote', function(req, res, next){
 
 /* POST /posts/:id/comments - add a new comment to a post by ID*/
 
-router.post('posts/:post/comments', function(req, res, next){
+router.post('/posts/:post/comments', function(req, res, next){
     var comment = new Comment(req.body);
     comment.post = req.post;
 
@@ -92,7 +93,7 @@ router.param('comment', function(req, res, next, id){
 
 
 
-router.put('/post/:post/comments/:comment/upvote', function(req, res, next){
+router.put('/posts/:post/comments/:comment/upvote', function(req, res, next){
     req.comment.upvote(function(err, comment){
         if(err){ return next(err); }
         res.json(comment);
